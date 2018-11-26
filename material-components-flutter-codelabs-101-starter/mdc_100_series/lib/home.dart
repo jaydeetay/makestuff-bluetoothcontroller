@@ -22,11 +22,55 @@ class HomePage extends StatelessWidget {
     // TODO: Return an AsymmetricView (104)
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
-      // TODO: Add app bar (102)
+      appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(
+                Icons.menu,
+                semanticLabel: "menu",
+              ),
+              onPressed: () {
+                print("clicked");
+              }),
+          title: Text("SHRINE"),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.search), onPressed: () {}),
+            IconButton(icon: Icon(Icons.tune), onPressed: () {}),
+          ]),
       // TODO: Add a grid view (102)
-      body: Center(
-        child: Text('You did it!'),
+      body: GridView.count(
+        crossAxisCount: 2,
+        padding: EdgeInsets.all(16.0),
+        childAspectRatio: 8/9,
+        children: _buildGridCards(8),
       ),
+    );
+  }
+  
+  List<Widget> _buildGridCards(int n) {
+    return List.generate(n, _getCard);
+  }
+
+  Widget _getCard(int i) {
+    return Card(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget> [
+          AspectRatio(
+              aspectRatio: 18.0/11.0,
+              child: Image.asset('assets/diamond.png')),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Title"),
+                SizedBox(height: 8.0),
+                Text("Secondary Text " + i.toString())
+              ]
+            )
+          )
+        ]
+      )
     );
   }
 }
